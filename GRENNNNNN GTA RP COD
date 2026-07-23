@@ -1,8 +1,3 @@
-export default {
-  async fetch(request) {
-    return new Response(
--- Original bytecode processed and cleaned
--- Deobfuscated using Moonsec Deobfuscator
 repeat task.wait() until game:IsLoaded()
 local Players,RunService,UIS,TS,Lighting,HS = game:GetService("Players"),game:GetService("RunService"),game:GetService("UserInputService"),game:GetService("TweenService"),game:GetService("Lighting"),game:GetService("HttpService")
 local LP = Players.LocalPlayer
@@ -166,6 +161,7 @@ local function isRagdollState(hum)
 	local st=hum:GetState()
 	return hum.PlatformStand or st==Enum.HumanoidStateType.Physics or st==Enum.HumanoidStateType.Ragdoll or st==Enum.HumanoidStateType.FallingDown
 end
+
 local function isMyPlotByName(plotName)
 	local plots=workspace:FindFirstChild("Plots")
 	if not plots then return false end
@@ -488,6 +484,7 @@ function runDropKeybindBurst()
 		end
 	end)
 end
+
 local function doAutoTPDown(force)
 	local char=LP.Character;if not char then return end
 	local hrp=char:FindFirstChild("HumanoidRootPart");if not hrp then return end
@@ -543,6 +540,7 @@ do
        if stretchRezOriginalCFrame then local cam=workspace.CurrentCamera; if cam then cam.CFrame=stretchRezOriginalCFrame end end
    end
 end
+
 local function applyAntiLagDerender(obj)
 	pcall(function()
 		if obj:IsA("Accessory") or obj:IsA("Hat") then obj:Destroy()
@@ -800,6 +798,7 @@ RunService.Heartbeat:Connect(function()
 		end
 	end
 end)
+
 --// .EXE added systems from White Hub
 autoSwitchSpeedEnabled=false
 autoTurnOffSpeedEnabled=false
@@ -817,8 +816,10 @@ currentSkyTheme="None"
 currentAnimePack="NINJA"
 driftOriginalLighting=nil
 DRIFT_SKY_TAG="_ExeHubSkyMod"
+
 setAutoSwitchSpeedVisual,setAutoTurnOffSpeedVisual,setRagdollTimerVisual,setFpsBoostVisual,setTryhardVisual,setZombieVisual,setFovVisual=nil,nil,nil,nil,nil,nil,nil
 fovValueBox=nil
+
 function setupRagdollTimer(char)
 	if ragdollTimerConn then ragdollTimerConn:Disconnect();ragdollTimerConn=nil end
 	if not ragdollTimerEnabled or not char then return end
@@ -839,9 +840,11 @@ function setupRagdollTimer(char)
 		end
 	end)
 end
+
 function applyFPSBoost()
 	pcall(function() settings().Rendering.QualityLevel=Enum.QualityLevel.Level01 end)
 end
+
 -- ── TRYHARD ANIMATIONS ──
 startTryhardAnim, stopTryhardAnim=nil,nil
 do
@@ -897,6 +900,7 @@ do
        local char=LP.Character; if char then restoreOriginalTryhardAnims(char) end
    end
 end
+
 -- ── ZOMBIE ANIMATIONS ──
 setZombieMode=nil
 do
@@ -954,6 +958,8 @@ do
        if on then startZombieMode() else stopZombieMode() end
    end
 end
+
+
 DRIFT_SKY_PRESETS={
    None={kind="off"},
    Night={clock=0,brightness=0.8,outAmb={40,60,100},ambient={20,30,60},sky={stars=3000,moon=14},atm={dens=0.25,color={50,80,140},decay={20,40,100},glare=0,haze=0.5}},
@@ -980,6 +986,7 @@ DRIFT_SKY_PRESETS={
    ["Emerald Dawn"]={clock=6,brightness=1.8,outAmb={100,220,120},ambient={60,160,80},sky={stars=0,sun=9},atm={dens=0.28,color={80,200,100},decay={50,160,70},glare=1.5,haze=1.2},clouds={cover=0.4,dens=0.4,color={160,240,180}}},
 }
 DRIFT_SKY_ORDER={"None","Night","Aurora","Sunset","Galaxy","Cyber","Sakura","Pink Night","Blood Moon","Emerald Dawn","Volcanic","Arctic","Midnight Ocean","Vaporwave","Toxic","Solar Eclipse","Hellscape","Heaven","Storm","Sunrise","Deep Space","Lavender Dream","Inferno"}
+
 function driftSaveOriginalLighting()
    if driftOriginalLighting then return end
    driftOriginalLighting={ClockTime=Lighting.ClockTime,OutdoorAmbient=Lighting.OutdoorAmbient,Ambient=Lighting.Ambient,Brightness=Lighting.Brightness,FogStart=Lighting.FogStart,FogEnd=Lighting.FogEnd,FogColor=Lighting.FogColor,GlobalShadows=Lighting.GlobalShadows,LightingChildren={},TerrainChildren={}}
@@ -1006,6 +1013,7 @@ function applyDriftSkyTheme(mode)
    if preset.atm then driftMakeInst("Atmosphere",Lighting,{Density=preset.atm.dens or 0.3,Color=dC3(preset.atm.color),Decay=dC3(preset.atm.decay),Glare=preset.atm.glare or 1,Haze=preset.atm.haze or 1}) end
    if preset.clouds and terrain then driftMakeInst("Clouds",terrain,{Cover=preset.clouds.cover or 0.5,Density=preset.clouds.dens or 0.5,Color=dC3(preset.clouds.color)}) end
 end
+
 EXE_ANIME_PACKS = {
     NINJA = {["idle.Animation1"]="656117400",["idle.Animation2"]="656118341",["walk.WalkAnim"]="656121766",["run.RunAnim"]="656118852",["jump.JumpAnim"]="656117878",["climb.ClimbAnim"]="656114359",["fall.FallAnim"]="656115606"},
     LEVITATION = {["idle.Animation1"]="616006778",["idle.Animation2"]="616008087",["walk.WalkAnim"]="616013216",["run.RunAnim"]="616010382",["jump.JumpAnim"]="616008936",["climb.ClimbAnim"]="616003713",["fall.FallAnim"]="616005863"},
@@ -1034,6 +1042,7 @@ EXE_ANIME_PACKS = {
     ANTHRO = {["idle.Animation1"]="2510196951",["idle.Animation2"]="2510197257",["walk.WalkAnim"]="2510202577",["run.RunAnim"]="2510198475",["jump.JumpAnim"]="2510197830",["climb.ClimbAnim"]="2510192778",["fall.FallAnim"]="2510195892",["swim.Swim"]="10921264784",["swimidle.SwimIdle"]="10921265698"},
 }
 EXE_ANIME_NAMES = {"NINJA","LEVITATION","WEREWOLF","STYLISH","ROBOT","BUBBLY","CARTOONY","SUPERHERO","KNIGHT","ZOMBIE","ELDER","ASTRONAUT","ADIDAS","TOY","PIRATE","VAMPIRE","PATROL","CONFIDENT","POPSTAR","SNEAKY","PRINCESS","COWBOY","GHOST","NONE","ANTHRO"}
+
 function applyExeAnimePack(name)
 	local data=EXE_ANIME_PACKS[name];if not data then return end
 	currentAnimePack=name
@@ -1050,6 +1059,7 @@ function applyExeAnimePack(name)
 	s(animate.swim and animate.swim.Swim,data["swim.Swim"])
 	s(animate.swimidle and animate.swimidle.SwimIdle,data["swimidle.SwimIdle"])
 end
+
 function setFovEnabled(on)
 	fovEnabled=on
 	if on then
@@ -1068,6 +1078,8 @@ function resetFovAndCamera()
 	if stretchRezEnabled then disableStretchRez();if setStretchRezVisual then setStretchRezVisual(false) end end
 	if workspace.CurrentCamera then workspace.CurrentCamera.FieldOfView=70 end
 end
+
+
 EXE_GAMEPAD_KEYS=EXE_GAMEPAD_KEYS or {
 	[Enum.KeyCode.ButtonA]=true,[Enum.KeyCode.ButtonB]=true,[Enum.KeyCode.ButtonX]=true,[Enum.KeyCode.ButtonY]=true,
 	[Enum.KeyCode.ButtonL1]=true,[Enum.KeyCode.ButtonR1]=true,[Enum.KeyCode.ButtonL2]=true,[Enum.KeyCode.ButtonR2]=true,
@@ -1105,6 +1117,7 @@ function exeStartKeyListen(btn,onSet)
 		if onSet then onSet(inp.KeyCode,exeIsGamepadInput(inp)) end
 	end)
 end
+
 function openExeAnimationSearch()
 	local cg=game:GetService("CoreGui")
 	local old=cg:FindFirstChild("ExeAnimationSearch");if old then old:Destroy();return end
@@ -1139,6 +1152,7 @@ function openExeAnimationSearch()
 	frame.InputBegan:Connect(function(i) if i.UserInputType==Enum.UserInputType.MouseButton1 or i.UserInputType==Enum.UserInputType.Touch then dragOn=true;ds=i.Position;sp=frame.Position;i.Changed:Connect(function() if i.UserInputState==Enum.UserInputState.End then dragOn=false end end) end end)
 	UIS.InputChanged:Connect(function(i) if dragOn and (i.UserInputType==Enum.UserInputType.MouseMovement or i.UserInputType==Enum.UserInputType.Touch) then frame.Position=UDim2.new(sp.X.Scale,sp.X.Offset+i.Position.X-ds.X,sp.Y.Scale,sp.Y.Offset+i.Position.Y-ds.Y) end end)
 end
+
 function openExeInstaResetPanel()
 	local cg=game:GetService("CoreGui")
 	local old=cg:FindFirstChild("ExeInstaResetPanel");if old then old:Destroy();return end
@@ -1156,6 +1170,7 @@ function openExeInstaResetPanel()
 	frame.InputBegan:Connect(function(i) if i.UserInputType==Enum.UserInputType.MouseButton1 or i.UserInputType==Enum.UserInputType.Touch then dragOn=true;ds=i.Position;sp=frame.Position;i.Changed:Connect(function() if i.UserInputState==Enum.UserInputState.End then dragOn=false end end) end end)
 	UIS.InputChanged:Connect(function(i) if dragOn and (i.UserInputType==Enum.UserInputType.MouseMovement or i.UserInputType==Enum.UserInputType.Touch) then frame.Position=UDim2.new(sp.X.Scale,sp.X.Offset+i.Position.X-ds.X,sp.Y.Scale,sp.Y.Offset+i.Position.Y-ds.Y) end end)
 end
+
 function openExeLaggerPanel()
 	local cg=game:GetService("CoreGui")
 	local old=cg:FindFirstChild("ExeLagger_UI") or cg:FindFirstChild("ExeLaggerPanel")
@@ -1163,6 +1178,7 @@ function openExeLaggerPanel()
 	local laggerScript=[===[
 --// .exe lagger - PREMIUM PANEL (PINK & BLACK THEME)
 --// 100% RE-ENGINEERED WITH ORIGINAL REPLICATION LOGIC PRESERVED
+
 --// SERVICES
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
@@ -1170,8 +1186,10 @@ local TweenService = game:GetService("TweenService")
 local CoreGui = game:GetService("CoreGui")
 local HttpService = game:GetService("HttpService")
 local RunService = game:GetService("RunService")
+
 local player = Players.LocalPlayer
 local ConfigFile = "ExePCLaggerConfig.json"
+
 -- ⚙️ PODER EXACTO: 23 - 32 - 70 - 90 (CRAZY)
 local NIVELES = {
     Low     = { poder = 23 },
@@ -1179,12 +1197,14 @@ local NIVELES = {
     High    = { poder = 70 },
     Crazy   = { poder = 90 }
 }
+
 -- 🔑 TECLA PREDETERMINADA: M (SE GUARDA Y SE CARGA DE LA CONFIGURACIÓN)
 local keybind = Enum.KeyCode.M
 local laggerActive = false
 local lagThread = nil
 local nivelActual = "Low"
 local ventanaBloqueada = false
+
 -- 🎨 ESTILO ROSA Y NEGRO
 local UI_CONFIG = {
     Pink         = Color3.fromRGB(0, 255, 127),
@@ -1205,6 +1225,7 @@ local UI_CONFIG = {
     BorderColor  = Color3.fromRGB(0, 255, 127),
     GlowColor    = Color3.fromRGB(0, 255, 127),
 }
+
 -- 💾 CONFIG
 local function SaveConfig()
     local data = {
@@ -1214,6 +1235,7 @@ local function SaveConfig()
     }
     pcall(function() writefile(ConfigFile, HttpService:JSONEncode(data)) end)
 end
+
 local function LoadConfig()
     if pcall(isfile, ConfigFile) and isfile(ConfigFile) then
         pcall(function()
@@ -1230,6 +1252,7 @@ local function LoadConfig()
     end
 end
 LoadConfig()
+
 -- ⚠️ LAG ENGINE (PRESERVADO EXACTAMENTE IGUAL AL ORIGINAL)
 local function bomb(poder)
     local main, spam = {}, {{}}
@@ -1239,9 +1262,11 @@ local function bomb(poder)
     for i = 1, max do table.insert(main, spam) end
     pcall(function() game:GetService("RobloxReplicatedStorage").SetPlayerBlockList:FireServer(main) end)
 end
+
 -- 🧩 ELEMENTOS
 local toggleBall, toggleContainer, btnLow, btnMid, btnHigh, btnCrazy, lockButton
 local titleLabel, textLagger, keybindTextBox, toggleClick
+
 -- Funciones de actualización
 local function actualizarBotonesNivel()
     if btnLow then
@@ -1297,6 +1322,7 @@ local function actualizarBotonesNivel()
         end
     end
 end
+
 local function actualizarSwitch()
     if toggleContainer then
         toggleContainer.BackgroundColor3 = laggerActive and UI_CONFIG.ToggleOn or UI_CONFIG.ToggleOff
@@ -1315,6 +1341,7 @@ local function actualizarSwitch()
         toggleClick.TextColor3 = laggerActive and UI_CONFIG.Black or UI_CONFIG.Pink
     end
 end
+
 local function actualizarCandado()
     if lockButton then
         -- MODIFICADO: Mostrar Locked si está bloqueado, y Unlocked si está desbloqueado
@@ -1328,20 +1355,26 @@ local function actualizarCandado()
         end
     end
 end
+
 local function actualizarKeybindTextBox()
     if keybindTextBox then
         keybindTextBox.Text = keybind.Name
     end
 end
+
 local function toggleLagger()
     laggerActive = not laggerActive
+    
     local targetPos = laggerActive and UDim2.new(1, -18, 0.5, -8) or UDim2.new(0, 2, 0.5, -8)
+    
     if toggleBall then
         TweenService:Create(toggleBall, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
             Position = targetPos
         }):Play()
     end
+    
     actualizarSwitch()
+
     if laggerActive then
         if lagThread then task.cancel(lagThread) end
         lagThread = task.spawn(function()
@@ -1355,15 +1388,18 @@ local function toggleLagger()
         if lagThread then task.cancel(lagThread); lagThread = nil end
     end
 end
+
 -- 🖼️ INTERFAZ
 if CoreGui:FindFirstChild("KillHub_UI") then CoreGui.KillHub_UI:Destroy() end
 if CoreGui:FindFirstChild("WhiteLagger_UI") then CoreGui.WhiteLagger_UI:Destroy() end
 if CoreGui:FindFirstChild("ExeLagger_UI") then CoreGui.ExeLagger_UI:Destroy() end
+
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "ExeLagger_UI"
 screenGui.Parent = CoreGui
 screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 screenGui.ResetOnSpawn = false
+
 -- Panel Principal (Sólido, Sin contorno, Taller)
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
@@ -1375,6 +1411,7 @@ mainFrame.Position = UDim2.new(0.15, 0, 0.5, -55) -- Centrado verticalmente
 mainFrame.Parent = screenGui
 mainFrame.ClipsDescendants = true
 Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 8)
+
 -- 🖼️ FONDO PERSONALIZADO ROSA Y NEGRO
 local bgImage = Instance.new("ImageLabel")
 bgImage.Name = "BgImage"
@@ -1388,6 +1425,7 @@ bgImage.ScaleType = Enum.ScaleType.Stretch
 bgImage.ZIndex = 1
 bgImage.Parent = mainFrame
 Instance.new("UICorner", bgImage).CornerRadius = UDim.new(0, 8)
+
 local bgOverlay = Instance.new("Frame")
 bgOverlay.Name = "BgOverlay"
 bgOverlay.Size = UDim2.new(1, 0, 1, 0)
@@ -1398,6 +1436,7 @@ bgOverlay.BorderSizePixel = 0
 bgOverlay.ZIndex = 1
 bgOverlay.Parent = mainFrame
 Instance.new("UICorner", bgOverlay).CornerRadius = UDim.new(0, 8)
+
 -- ═══════════════════════════════════════════
 -- TÍTULO ".exe lagger" (ROSA)
 -- ═══════════════════════════════════════════
@@ -1412,6 +1451,8 @@ titleLabel.TextSize = 13
 titleLabel.TextXAlignment = Enum.TextXAlignment.Left
 titleLabel.TextYAlignment = Enum.TextYAlignment.Center
 titleLabel.ZIndex = 3
+
+
 -- ═══════════════════════════════════════════
 -- RED CIRCLE CLOSE BUTTON
 -- ═══════════════════════════════════════════
@@ -1439,6 +1480,7 @@ closeBtn.MouseButton1Click:Connect(function()
     if lagThread then task.cancel(lagThread); lagThread = nil end
     pcall(function() screenGui:Destroy() end)
 end)
+
 -- ═══════════════════════════════════════════
 -- BOTÓN DE BLOQUEO (LOCK/UNLOCK)
 -- ═══════════════════════════════════════════
@@ -1455,12 +1497,14 @@ lockButton.TextColor3 = UI_CONFIG.Pink
 lockButton.AutoButtonColor = false
 lockButton.ZIndex = 2
 Instance.new("UICorner", lockButton).CornerRadius = UDim.new(0, 4)
+
 lockButton.MouseButton1Click:Connect(function()
     ventanaBloqueada = not ventanaBloqueada
     actualizarCandado()
     SaveConfig()
 end)
 actualizarCandado()
+
 -- ═══════════════════════════════════════════
 -- "LAGGER" & CUADRO DE TEXTO PARA KEYBIND
 -- ═══════════════════════════════════════════
@@ -1475,6 +1519,7 @@ textLagger.TextSize = 11
 textLagger.TextXAlignment = Enum.TextXAlignment.Left
 textLagger.TextYAlignment = Enum.TextYAlignment.Center
 textLagger.ZIndex = 2
+
 -- Cuadro de texto (TextBox) para escribir la tecla deseada (al lado de LAGGER)
 keybindTextBox = Instance.new("TextBox", mainFrame)
 keybindTextBox.Name = "KeybindTextBox"
@@ -1491,6 +1536,7 @@ keybindTextBox.TextSize = 10
 keybindTextBox.ClearTextOnFocus = true
 keybindTextBox.ZIndex = 2
 Instance.new("UICorner", keybindTextBox).CornerRadius = UDim.new(0, 4)
+
 local function actualizarKeybind()
     local text = keybindTextBox.Text
     local cleanText = text:gsub("%s+", ""):upper()
@@ -1501,15 +1547,18 @@ local function actualizarKeybind()
             break
         end
     end
+    
     if foundKey then
         keybind = foundKey
         SaveConfig()
     end
     keybindTextBox.Text = keybind.Name
 end
+
 keybindTextBox.FocusLost:Connect(function(enterPressed)
     actualizarKeybind()
 end)
+
 -- ═══════════════════════════════════════════
 -- SWITCH DE ACTIVACIÓN (TOGGLE)
 -- ═══════════════════════════════════════════
@@ -1522,6 +1571,7 @@ toggleContainer.Position = UDim2.new(1, -54, 0, 34)
 toggleContainer.Size = UDim2.new(0, 48, 0, 20)
 toggleContainer.ZIndex = 2
 Instance.new("UICorner", toggleContainer).CornerRadius = UDim.new(1, 0)
+
 toggleBall = Instance.new("Frame", toggleContainer)
 toggleBall.BackgroundColor3 = UI_CONFIG.Pink
 toggleBall.BackgroundTransparency = 0.55
@@ -1530,6 +1580,7 @@ toggleBall.Size = UDim2.new(0, 16, 0, 16)
 toggleBall.Position = UDim2.new(0, 2, 0.5, -8)
 toggleBall.ZIndex = 2
 Instance.new("UICorner", toggleBall).CornerRadius = UDim.new(1, 0)
+
 toggleClick = Instance.new("TextButton", toggleContainer)
 toggleClick.BackgroundTransparency = 1
 toggleClick.Size = UDim2.new(1, 0, 1, 0)
@@ -1542,6 +1593,7 @@ toggleClick.TextXAlignment = Enum.TextXAlignment.Center
 toggleClick.TextYAlignment = Enum.TextYAlignment.Center
 toggleClick.MouseButton1Click:Connect(toggleLagger)
 toggleClick.AutoButtonColor = false
+
 -- ═══════════════════════════════════════════
 -- BOTONES DE NIVEL (LOW/MID/HIGH/CRAZY)
 -- ═══════════════════════════════════════════
@@ -1550,6 +1602,7 @@ local btnW = 44
 local btnH = 22
 local espaciado = 4
 local margenIzq = 6
+
 btnLow = Instance.new("TextButton", mainFrame)
 btnLow.Size = UDim2.new(0, btnW, 0, btnH)
 btnLow.Position = UDim2.new(0, margenIzq, 0, btnY)
@@ -1569,6 +1622,7 @@ btnLow.MouseButton1Click:Connect(function()
     actualizarBotonesNivel()
     SaveConfig()
 end)
+
 btnMid = Instance.new("TextButton", mainFrame)
 btnMid.Size = UDim2.new(0, btnW, 0, btnH)
 btnMid.Position = UDim2.new(0, margenIzq + btnW + espaciado, 0, btnY)
@@ -1588,6 +1642,7 @@ btnMid.MouseButton1Click:Connect(function()
     actualizarBotonesNivel()
     SaveConfig()
 end)
+
 btnHigh = Instance.new("TextButton", mainFrame)
 btnHigh.Size = UDim2.new(0, btnW, 0, btnH)
 btnHigh.Position = UDim2.new(0, margenIzq + (btnW + espaciado) * 2, 0, btnY)
@@ -1607,6 +1662,7 @@ btnHigh.MouseButton1Click:Connect(function()
     actualizarBotonesNivel()
     SaveConfig()
 end)
+
 btnCrazy = Instance.new("TextButton", mainFrame)
 btnCrazy.Size = UDim2.new(0, btnW, 0, btnH)
 btnCrazy.Position = UDim2.new(0, margenIzq + (btnW + espaciado) * 3, 0, btnY)
@@ -1626,11 +1682,13 @@ btnCrazy.MouseButton1Click:Connect(function()
     actualizarBotonesNivel()
     SaveConfig()
 end)
+
 -- Inicialización de estados visuales
 actualizarBotonesNivel()
 actualizarSwitch()
 actualizarCandado()
 actualizarKeybindTextBox()
+
 -- ═══════════════════════════════════════════
 -- ARRASTRAR PANEL (DRAGGING SYSTEM)
 -- ═══════════════════════════════════════════
@@ -1643,6 +1701,7 @@ mainFrame.InputBegan:Connect(function(input)
         startPos = mainFrame.Position
     end
 end)
+
 UserInputService.InputChanged:Connect(function(input)
     if not isDragging or ventanaBloqueada then return end
     if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
@@ -1650,11 +1709,13 @@ UserInputService.InputChanged:Connect(function(input)
         mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
     end
 end)
+
 mainFrame.InputEnded:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         isDragging = false
     end
 end)
+
 -- ═══════════════════════════════════════════
 -- ACTIVACIÓN CON LA TECLA CONFIGURADA
 -- ═══════════════════════════════════════════
@@ -1663,14 +1724,18 @@ UserInputService.InputBegan:Connect(function(input, gp)
     if gp then return end
     -- Evita disparar el lagger si estás escribiendo una tecla en la TextBox
     if UserInputService:GetFocusedTextBox() then return end
+    
     if input.KeyCode == keybind or (input.UserInputType == Enum.UserInputType.Gamepad1 and input.KeyCode == keybind) then
         toggleLagger()
     end
 end)
+
 ]===]
 	local ok,err=pcall(function() loadstring(laggerScript)() end)
 	if not ok then warn(".EXE LAGGER ERROR",err) end
 end
+
+
 --// AIMBOT 2 (ANTI BAT BYPASS) - Fixed bypass logic
 if aimbot2Enabled==nil then aimbot2Enabled=false end
 aimbot2Conn=aimbot2Conn or nil
@@ -1684,6 +1749,7 @@ AIMBOT2_BAT_SLAP_LIST=AIMBOT2_BAT_SLAP_LIST or {
 	"Emerald Slap","Ruby Slap","Dark Matter Slap","Flame Slap",
 	"Nuclear Slap","Galaxy Slap","Glitched Slap"
 }
+
 function aimbot2FindBat()
 	local char=LP.Character
 	if not char then return nil end
@@ -1707,6 +1773,7 @@ function aimbot2FindBat()
 	end
 	return nil
 end
+
 function aimbot2TrySwing()
 	if aimbot2HitCD then return end
 	aimbot2HitCD=true
@@ -1724,6 +1791,7 @@ function aimbot2TrySwing()
 	end)
 	task.delay(AIMBOT2_SWING_CD,function() aimbot2HitCD=false end)
 end
+
 function aimbot2GetClosestTarget()
 	local root=LP.Character and LP.Character:FindFirstChild("HumanoidRootPart")
 	if not root then return nil,math.huge end
@@ -1740,6 +1808,7 @@ function aimbot2GetClosestTarget()
 	end
 	return closest,minDist
 end
+
 function startAimbot2()
 	if aimbot2Conn then aimbot2Conn:Disconnect();aimbot2Conn=nil end
 	aimbot2Enabled=true
@@ -1783,6 +1852,7 @@ function startAimbot2()
 		if targetDist<=AIMBOT2_HIT_DIST then aimbot2TrySwing() end
 	end)
 end
+
 function stopAimbot2()
 	aimbot2Enabled=false
 	if aimbot2Conn then aimbot2Conn:Disconnect();aimbot2Conn=nil end
@@ -1800,6 +1870,7 @@ function stopAimbot2()
 	end
 	aimbot2HitCD=false
 end
+
 function setAimbot2(on)
 	if on and not canUseAutoPath() then
 		aimbot2Enabled=false
@@ -1814,11 +1885,13 @@ function setAimbot2(on)
 	if mobBtnRefs and mobBtnRefs.aimbot2 then mobBtnRefs.aimbot2(on) end
 	pcall(saveConfig)
 end
+
 --// ANTI DESYNC AIMBOT - .EXE integration
 if antiDesyncAimbotEnabled==nil then antiDesyncAimbotEnabled=false end
 antiDesyncCooldown=antiDesyncCooldown or false
 antiDesyncConn=antiDesyncConn or nil
 setAntiDesyncAimbotVisual=setAntiDesyncAimbotVisual or nil
+
 function antiDesyncGetBat()
 	local char=LP.Character
 	if not char then return nil end
@@ -1904,12 +1977,15 @@ function setAntiDesyncAimbot(on)
 	if mobBtnRefs and mobBtnRefs.antiDesync then mobBtnRefs.antiDesync(on) end
 	pcall(saveConfig)
 end
+
+
 --// BODY LOCK
 if bodyLockEnabled==nil then bodyLockEnabled=false end
 bodyLockRadius=bodyLockRadius or 60
 bodyLockConn=bodyLockConn or nil
 setBodyLockVisual=setBodyLockVisual or nil
 bodyLockRadiusBox=bodyLockRadiusBox or nil
+
 function getNearestBodyLockTarget()
 	local character=LP.Character
 	local root=character and character:FindFirstChild("HumanoidRootPart")
@@ -1931,6 +2007,7 @@ function getNearestBodyLockTarget()
 	end
 	return nearest
 end
+
 function startBodyLock()
 	if bodyLockConn then return end
 	bodyLockEnabled=true
@@ -1958,18 +2035,21 @@ function startBodyLock()
 		end
 	end)
 end
+
 function stopBodyLock()
 	bodyLockEnabled=false
 	if bodyLockConn then bodyLockConn:Disconnect();bodyLockConn=nil end
 	local hum=LP.Character and LP.Character:FindFirstChildOfClass("Humanoid")
 	if hum then hum.AutoRotate=true end
 end
+
 function setBodyLock(on)
 	bodyLockEnabled=on
 	if on then startBodyLock() else stopBodyLock() end
 	if setBodyLockVisual then setBodyLockVisual(on) end
 	pcall(saveConfig)
 end
+
 LP.CharacterAdded:Connect(function(char)
 	task.wait(0.5)
 	setupSpeedIndicator(char)
@@ -2007,6 +2087,7 @@ function saveConfig()
 	if writefile then pcall(function() writefile("exePC.json",HS:JSONEncode(cfg)) end) end
 end
 task.spawn(function() while task.wait(1) do pcall(saveConfig) end end)
+
 -- EXE extra autosave hooks
 pcall(function() game:BindToClose(function() pcall(saveConfig) end) end)
 pcall(function() LP.AncestryChanged:Connect(function(_,parent) if not parent then pcall(saveConfig) end end) end)
@@ -2038,6 +2119,7 @@ local function toggleLaggerMode()
 	end
 	refreshSpeedModeLabel()
 end
+
 local function setModeNormal()
 	speedMode=false;laggerToggled=false;laggerPhase=0;refreshSpeedModeLabel()
 	if mobBtnRefs and mobBtnRefs.carrySpeed then mobBtnRefs.carrySpeed(false) end
@@ -2067,6 +2149,7 @@ local function startAutoSwitchSpeed()
 		end
 	end)
 end
+
 local function buildGui()
 	local BG    = Color3.fromRGB(0, 255, 127)
 	local BG2   = Color3.fromRGB(9,9,13)
@@ -2352,6 +2435,7 @@ local function buildGui()
 		nxt.Activated:Connect(function() idx=idx%#names+1;apply() end)
 		return val
 	end
+
 	local pbFrame=Instance.new("Frame",gui)
 	pbFrame.Size=UDim2.new(0,220,0,34);pbFrame.Position=UDim2.new(0.5,-110,1,-50);exeGrabBar=pbFrame
 	pbFrame.BackgroundColor3=BG2;pbFrame.BorderSizePixel=0;pbFrame.Active=true;pbFrame.ClipsDescendants=false
@@ -2376,6 +2460,7 @@ local function buildGui()
 	progressFill=Instance.new("Frame",pbg)
 	progressFill.Size=UDim2.new(0,0,1,0);progressFill.BackgroundColor3=RED;progressFill.BorderSizePixel=0
 	Instance.new("UICorner",progressFill).CornerRadius=UDim.new(1,0)
+
 	mkSect(movPage,"Speed Configuration")
 	do local row=mkRow(movPage,32);mkLabel(row,"Normal Speed");normalBox=mkBox(row,NS,55,62,function(v) if v>0 and v<=500 then NS=v end;saveConfig() end) end
 	do local row=mkRow(movPage,32);mkLabel(row,"Carry Speed");carryBox=mkBox(row,CS,55,62,function(v) if v>0 and v<=500 then CS=v end;saveConfig() end) end
@@ -2395,6 +2480,7 @@ local function buildGui()
 	mkSect(movPage,"Animations")
 	setTryhardVisual=mkToggle(movPage,"Try Hard Animation",function(on) tryhardAnimEnabled=on;if on then startTryhardAnim() else stopTryhardAnim() end;saveConfig() end)
 	setZombieVisual=mkToggle(movPage,"Zombie Animation",function(on) zombieAnimEnabled=on;setZombieMode(on);saveConfig() end)
+
 	mkSect(combatPage,"Steal Configuration")
 	do local row=mkRow(combatPage,32);mkLabel(row,"Radius");radInput=mkBox(row,Steal.StealRadius,55,62,function(v) if v>=0.5 and v<=300 then Steal.StealRadius=v;if progressRadLbl then progressRadLbl.Text=string.format("RADIUS: %.2g",Steal.StealRadius) end end;saveConfig() end) end
 	do local row=mkRow(combatPage,32);mkLabel(row,"Duration");durationBox=mkBox(row,Steal.StealDuration,55,62,function(v) if v>=0.05 and v<=10 then Steal.StealDuration=v;if progressDurLbl then progressDurLbl.Text=string.format("DURATION: %.2gs",Steal.StealDuration) end elseif durationBox then durationBox.Text=tostring(Steal.StealDuration) end;saveConfig() end) end
@@ -2423,6 +2509,7 @@ local function buildGui()
 	mkSect(combatPage,"Body Lock")
 	setBodyLockVisual=mkToggle(combatPage,"Body Lock",function(on) setBodyLock(on) end)
 	do local row=mkRow(combatPage,32);mkLabel(row,"Body Lock Radius");bodyLockRadiusBox=mkBox(row,bodyLockRadius,55,62,function(v) if v>=1 and v<=500 then bodyLockRadius=v else bodyLockRadiusBox.Text=tostring(bodyLockRadius) end;saveConfig() end) end
+
 	mkSect(keysPage,"Move Keys")
 	mkKeyRow(keysPage,"Speed Key",KB.SpeedToggle,"key")
 	mkKeyRow(keysPage,"Lagger Key",KB.LaggerToggle,"key")
@@ -2438,6 +2525,7 @@ local function buildGui()
 	mkKeyRow(keysPage,"Insta Reset Key",KB.InstaReset,"key")
 	mkSect(keysPage,"Interface")
 	mkKeyRow(keysPage,"UI Toggle Key",KB.GuiHide,"key")
+
 	mkSect(padPage,"Move Keys")
 	mkKeyRow(padPage,"Speed Key",KB.SpeedToggle,"pad")
 	mkKeyRow(padPage,"Lagger Key",KB.LaggerToggle,"pad")
@@ -2453,6 +2541,7 @@ local function buildGui()
 	mkKeyRow(padPage,"Insta Reset Key",KB.InstaReset,"pad")
 	mkSect(padPage,"Interface")
 	mkKeyRow(padPage,"UI Toggle Key",KB.GuiHide,"pad")
+
 	mkSect(utilPage,"Visual")
 	setAntiLagVisual=mkToggle(utilPage,"Anti Lag",function(on) if on then enableAntiLag() else disableAntiLag() end;saveConfig() end)
 	setFpsBoostVisual=mkToggle(utilPage,"FPS Boost",function(on) fpsBoostEnabled=on;if on then applyFPSBoost() end;saveConfig() end)
@@ -2498,6 +2587,7 @@ local function buildGui()
 			sb.Activated:Connect(function() uiScale=sz/100;scaleObj.Scale=uiScale;refreshBtns(sz);saveConfig() end)
 		end
 	end
+
 	UIS.InputBegan:Connect(function(input,gpe)
 		if _anyKeyListening then return end
 		if input.UserInputType==Enum.UserInputType.Keyboard then
@@ -2535,6 +2625,7 @@ local function buildGui()
 	end)
 	selectPage("mov")
 end
+
 local _savedCfg = nil
 local function loadConfigKeys()
 	if not(isfile and isfile("exePC.json")) then return end
@@ -2613,6 +2704,8 @@ end
 loadConfigKeys()
 buildGui()
 loadConfigState()
+
+
 -- EXE dedicated new aimbot keybind listener
 UIS.InputBegan:Connect(function(input,gpe)
 	if _anyKeyListening then return end
@@ -2630,13 +2723,5 @@ UIS.InputBegan:Connect(function(input,gpe)
 		pcall(saveConfig)
 	end
 end)
-print(".EXE PC LOADED")
 
--- ضع سكربتك هنا
-`, {
-      headers: {
-        "Content-Type": "text/plain"
-      }
-    });
-  }
-}
+print(".EXE PC LOADED")
