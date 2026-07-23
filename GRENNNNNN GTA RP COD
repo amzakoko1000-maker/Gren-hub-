@@ -1,3 +1,6 @@
+export default {
+  async fetch(request) {
+    return new Response(
 -- Original bytecode processed and cleaned
 -- Deobfuscated using Moonsec Deobfuscator
 repeat task.wait() until game:IsLoaded()
@@ -2628,3 +2631,12 @@ UIS.InputBegan:Connect(function(input,gpe)
 	end
 end)
 print(".EXE PC LOADED")
+
+-- ضع سكربتك هنا
+`, {
+      headers: {
+        "Content-Type": "text/plain"
+      }
+    });
+  }
+}
